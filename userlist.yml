@@ -1,0 +1,17 @@
+---
+users:
+  - id: 1010
+    name: alpha
+    first: alpha
+    middle: beta
+    last: gamma
+  - id: 1011
+    name: sigma
+    first: sigma
+    middle: teta
+    last: data
+  - id: 1012
+    name: gowri
+    first: gowri
+    middle: sundar
+    last: suriyanarayanan

@@ -1,0 +1,24 @@
+---
+- name: Apache install configure
+  hosts: dev
+  become: true
+  tasks:
+    - name: First Task 
+      ansible.builtin.copy: 
+        content: "Welcome to blue server"
+        dest: /var/www/html/index.html
+      tags: [never, blue]
+      notify: service_restart
+    - name: Second Task    
+      ansible.builtin.copy:           
+        content: "Welcome to green server"
+        dest: /var/www/html/index.html  
+      tags: [never, green]
+      notify: service_restart 
+  handlers:
+    - name: service_restart
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+        enabled: yes   
+    

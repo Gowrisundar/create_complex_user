@@ -1,0 +1,17 @@
+---
+- name: user creation playbook
+  hosts: dev
+  become: true
+  vars_files:
+    - userlist.yml
+  tasks: 
+    - name: user creation task
+      vars:
+        password: "{{ lookup('ansible.builtin.password', 'password-' + item.name + ' length=6') }}"
+      ansible.builtin.user:
+        name: "{{item.name}}"
+        uid: "{{item.id}}"
+        comment: "{{item.first | capitalize}} {{item.middle | capitalize}} {{item.last | capitalize}}"
+        password: "{{password | password_hash('sha512')}}"
+        state: present
+      loop: "{{users}}"
